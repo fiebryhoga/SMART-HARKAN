@@ -1,0 +1,276 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Initialize Next.js (App Router) with TypeScript strict mode and Tailwind CSS; install runtime deps (`@prisma/client`, `jose`, `bcryptjs`, `zod`) and dev deps (`prisma`, `vitest`, `fast-check`, `@fast-check/vitest`)": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929879474
+      },
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929891120
+      }
+    ],
+    "1.2 Configure ESLint with a rule banning inline `style` attributes and strict TS rules; verify `next lint` is clean": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929879604
+      }
+    ],
+    "1.3 Set up Vitest with `@fast-check/vitest`; configure `fcConfig` / per-suite `numRuns: 100`; add `vitest.config.ts` and a sample passing test": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929879686
+      }
+    ],
+    "1.4 Initialize Prisma with `postgresql` datasource; add `DATABASE_URL` to `.env.example` and a local `.env`; verify `prisma -v` resolves": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929879787
+      }
+    ],
+    "2.1 Author `prisma/schema.prisma` with enums (`Role`, `DockType`, `DockStatus`, `ShipCategory`, `AuditAction`) and models `User`, `Client`, `DockFacility`, `MroProject`, `AuditLog`": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929879841
+      }
+    ],
+    "2.2 Create and apply the initial migration to the dev database; add a seed script for roles, clients, and an admin user": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929879886
+      }
+    ],
+    "2.3 Add an AuditLog immutability migration: `REVOKE UPDATE, DELETE ON \"AuditLog\" FROM <app_role>` and a `BEFORE UPDATE OR DELETE` trigger that raises an exception": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929879938
+      }
+    ],
+    "3.1 Create `lib/db.ts` Prisma client singleton (reuse on `globalThis` in non-production)": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880004
+      }
+    ],
+    "3.2 Add a Prisma client extension/interceptor that throws on any `auditLog.update(...)`, `auditLog.delete(...)`, or `auditLog.deleteMany(...)` call (defense-in-depth against accidental mutation)": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880055
+      }
+    ],
+    "4.1 Implement `lib/validation/dimensions.ts`: `validateDimension(value, field)`, `validateTonnage(value, field)`, `hasAtMostTwoDecimals(value)`, `DIMENSION_MAX = 999.99`, `TONNAGE_MAX = 999999.99`; errors carry the exact `field` name and Indonesian messages": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880103
+      }
+    ],
+    "4.3 Implement `lib/validation/dock-capacity.ts`: `validateDockCapacity(ship, dock)` returning `valid`, `exceededDimensions` (exactly the dims where ship > max), and an Indonesian `message` naming the exceeded dimension(s)": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880138
+      }
+    ],
+    "4.5 Implement `lib/validation/dates.ts`: `validateDateOrder(plannedDockingDate, plannedUndockingDate)` accepting iff `plannedUndockingDate > plannedDockingDate` (strictly later); Indonesian message": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880173
+      }
+    ],
+    "4.7 Implement `lib/validation/project-code.ts`: `validateProjectCodeFormat(code)` with `PROJECT_CODE_REGEX = /^HKN-\\d{4}-\\d{3}$/`, and async `isProjectCodeUnique(code, excludeId?)` backed by Prisma": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880219
+      }
+    ],
+    "4.9 Implement `lib/validation/dock-status.ts`: `isDockAcceptingNewProjects(dock)` returning `true` iff `dock.status === 'ACTIVE'`": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880254
+      }
+    ],
+    "4.11 Implement `lib/validation/dock-delete.ts`: `canDeleteDock(projectsOnDock)` returning `false` iff at least one project has status `IN_DOCK`": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880288
+      }
+    ],
+    "4.13 Implement `lib/validation/aggregate.ts`: `validateDockFacilityInput(input)` and `validateMroProjectInput(input)` aggregating all applicable validators into a single `errors[]` so every failing field is reported at once": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880321
+      }
+    ],
+    "5. Checkpoint - validation library": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880370
+      }
+    ],
+    "6.1 Implement `lib/auth/session.ts`: `createSession(payload)` signing JWT via `jose` (HS256, `iss: 'smart-harkan'`, 8h exp), `verifySession(token)`, `SESSION_COOKIE = 'session'` with `httpOnly`, `sameSite: 'lax'`, `path: '/'`, `secure` in prod, `maxAge: 8h`; `SessionPayload = { userId, role, clientId? }`": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880437
+      }
+    ],
+    "6.3 Implement `lib/auth/rbac.ts`: `Role` type, `ROLE_DASHBOARD` map, `canAccess(role, path)`, `isMasterDataRole(role)`, `isAdminRole(role)`; `CLIENT`/`FIELD_ENGINEER`/`CLASS_SURVEYOR` denied on admin/master paths; `ADMIN` only on `/admin/config`": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880503
+      }
+    ],
+    "6.5 Implement `middleware.ts` (Edge runtime, `jose.jwtVerify`, no DB import): public `/login` + `/api/auth/*`; on missing/invalid JWT return `401` JSON for `/api/*` or `302 → /login` for pages; deny restricted roles with `403` JSON (API) or redirect (pages); `matcher` covers `/dashboard/:path*`, `/api/:path*`, `/admin/:path*`": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880540
+      }
+    ],
+    "7. Checkpoint - authentication and RBAC": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880574
+      }
+    ],
+    "8.1 Implement `lib/audit/audit-logger.ts`: `withAuditLog(opts)` running the business operation and the `AuditLog` insert inside one `prisma.$transaction(async (tx) => {...})`; capture `oldValues` (pre-op snapshot, `{}` for CREATE) and `newValues` (post-op snapshot); commit only if both succeed; throw on any failure so callers can map to a 4xx/5xx response": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880641
+      }
+    ],
+    "9.1 Implement `lib/services/dock-facilities.ts`: `listDockFacilities()`, `createDockFacility(user, input)`, `updateDockFacility(user, id, input)` (aggregated validation + `withAuditLog`), `softDeleteDockFacility(user, id)` (block with Indonesian `CONFLICT` message iff `canDeleteDock` is false, else set `deletedAt` via `withAuditLog` `SOFT_DELETE`)": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880686
+      }
+    ],
+    "9.2 Implement `lib/services/mro-projects.ts`: `listProjectsForUser(user)` filtering by `clientId` for `CLIENT` role; `createMroProject(user, input)` (required fields, code format + uniqueness, dimension validation, `validateDockCapacity`, `validateDateOrder`, `isDockAcceptingNewProjects`, `withAuditLog` `CREATE`); `softDeleteMroProject(user, id)` (`deletedAt` via `withAuditLog`)": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880724
+      }
+    ],
+    "10. Checkpoint - audit trail and services": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880774
+      }
+    ],
+    "11.1 Implement `/api/auth/login` (POST) and `/api/auth/logout` (POST): verify credentials with `bcryptjs`, issue/destroy the `session` cookie via `lib/auth/session`, redirect to `ROLE_DASHBOARD[role]` on success, return `401 INVALID_CREDENTIALS` with an Indonesian message and no `Set-Cookie` on failure": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880824
+      }
+    ],
+    "11.2 Implement `/api/dock-facilities` (GET/POST) and `/api/dock-facilities/[id]` (PUT/DELETE): enforce ADMIN/PROJECT_MANAGER via RBAC, run aggregated validation (preserve input on error), create/update via `withAuditLog`, soft-delete respecting the IN_DOCK guard (`409 CONFLICT` Indonesian); GET excludes soft-deleted rows": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880872
+      }
+    ],
+    "11.3 Implement `/api/mro-projects` (GET/POST) and `/api/mro-projects/[id]` (DELETE): enforce RBAC, apply project-code + dimension + capacity + date + dock-active validation (422 VALIDATION_ERROR listing failed fields, Indonesian), create via `withAuditLog`, soft-delete via `withAuditLog`; GET honors CLIENT isolation": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880936
+      }
+    ],
+    "11.4 Implement `/api/audit-logs` (GET only); assert no PUT/PATCH/DELETE handler exists anywhere for audit logs": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929880971
+      }
+    ],
+    "12.1 Implement the root `app/layout.tsx` with the Tailwind maritime palette (Deep Navy `#0A192F`, Steel Slate `#334155`, Safety Orange `#F97316`) and a Dark Mode toggle that persists preference across sessions (cookie/localStorage); no inline `style` attributes": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881028
+      }
+    ],
+    "12.2 Implement responsive navigation/header that adapts across 360–1280px without horizontal scroll (mobile menu at narrow widths)": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881086
+      }
+    ],
+    "12.3 Implement `/login` page with Indonesian labels, a credential form, and inline Indonesian error display": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881122
+      }
+    ],
+    "12.4 Implement role dashboards `/dashboard/{admin,project-manager,field-engineer,class-surveyor,client}` with Indonesian labels": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881170
+      }
+    ],
+    "12.5 Implement `/dashboard/dock-facilities` management page (ADMIN/PROJECT_MANAGER) with Indonesian labels, create/update forms, per-field validation errors, and preserved user input on failure": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881219
+      }
+    ],
+    "12.6 Implement `/dashboard/mro-projects` page with Indonesian labels and project registration that surfaces capacity/date/code/dock validation failures by field": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881256
+      }
+    ],
+    "12.7 Implement `/admin/config` page with English labels, accessible to ADMIN only (enforced by middleware/RBAC)": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881290
+      }
+    ],
+    "13. Checkpoint - API routes and UI": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881323
+      }
+    ],
+    "15. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "bf4bb418-af0c-4128-84b1-b22a49c9c866",
+        "chatSessionId": "sess_698c0506-863e-4647-8683-472c69dfb23a",
+        "timestamp": 1794929881353
+      }
+    ]
+  }
+}
